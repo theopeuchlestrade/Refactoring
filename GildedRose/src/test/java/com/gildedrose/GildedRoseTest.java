@@ -91,7 +91,7 @@ class GildedRoseTest {
   }
 
   @Test
-  @DisplayName("Test that the Aged Brie quality is changed")
+  @DisplayName("Test that the Aged Brie quality is changed and sellIn < 0")
   void testQualityAgedBrieInf0() {
     Item element1 = new Item("Aged Brie", 0, 48);
     Item element2 = new Item("Aged Brie", 0, 49);
@@ -106,11 +106,11 @@ class GildedRoseTest {
   @Test
   @DisplayName("Test Sulfuras is changed")
   void testItemSulfuras() {
-    Item element = new Item("Sulfuras, Hand of Ragnaros", -1, 15);
+    Item element = new Item("Sulfuras, Hand of Ragnaros", 0, 0);
     GildedRose app = new GildedRose(new Item[] {element});
     app.updateQuality();
-    assertThat(app.items[0].quality, is(15));
-    assertThat(app.items[0].sellIn, is(-1));
+    assertThat(app.items[0].quality, is(80));
+    assertThat(app.items[0].sellIn, is(100_000_000));
   }
 
   @Test
@@ -146,8 +146,21 @@ class GildedRoseTest {
     // Test for quality < 11
     assertThat(app.items[5].sellIn, is(9));
     assertThat(app.items[5].quality, is(50));
+  }
 
 
+  @Test
+  @DisplayName("Test Conjured item")
+  void testConjuredItem(){
+    Item element1 = new Item("Conjured Shoes", 10, 20);
+    Item element2 = new Item("Conjured Shoes", 0, 20);
+    GildedRose app = new GildedRose(new Item[] {element1, element2});
+    app.updateQuality();
+    assertThat(element1.quality, is(18));
+    assertThat(element1.sellIn, is(9));
+
+    assertThat(element2.quality, is(16));
+    assertThat(element2.sellIn, is(-1));
   }
 
 }
