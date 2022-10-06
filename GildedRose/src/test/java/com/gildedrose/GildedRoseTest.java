@@ -148,7 +148,6 @@ class GildedRoseTest {
     assertThat(app.items[5].quality, is(50));
   }
 
-
   @Test
   @DisplayName("Test Conjured item")
   void testConjuredItem(){

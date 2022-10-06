@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.gildedrose.GildedRoseTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2022-10-06T11:53:28" hostname="pikachu" time="0.638">
+<testsuite name="com.gildedrose.GildedRoseTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2022-10-06T12:16:37" hostname="pikachu" time="0.449">
   <properties/>
-  <testcase name="Test that the name is unchanged" classname="com.gildedrose.GildedRoseTest" time="0.136"/>
-  <testcase name="Test toString() function worked" classname="com.gildedrose.GildedRoseTest" time="0.212"/>
-  <testcase name="Test that the Aged Brie quality is unchanged" classname="com.gildedrose.GildedRoseTest" time="0.003"/>
-  <testcase name="Test 'Backstage passes to a TAFKAL80ETC concert' item" classname="com.gildedrose.GildedRoseTest" time="0.01"/>
-  <testcase name="Test that the quality is updated for each item of app" classname="com.gildedrose.GildedRoseTest" time="0.003"/>
+  <testcase name="Test that the name is unchanged" classname="com.gildedrose.GildedRoseTest" time="0.106"/>
+  <testcase name="Test toString() function worked" classname="com.gildedrose.GildedRoseTest" time="0.182"/>
+  <testcase name="Test that the Aged Brie quality is unchanged" classname="com.gildedrose.GildedRoseTest" time="0.004"/>
+  <testcase name="Test 'Backstage passes to a TAFKAL80ETC concert' item" classname="com.gildedrose.GildedRoseTest" time="0.005"/>
+  <testcase name="Test that the quality is updated for each item of app" classname="com.gildedrose.GildedRoseTest" time="0.005"/>
   <testcase name="Test Conjured item" classname="com.gildedrose.GildedRoseTest" time="0.003"/>
   <testcase name="Test that the quality is changed" classname="com.gildedrose.GildedRoseTest" time="0.003"/>
-  <testcase name="Test Sulfuras is changed" classname="com.gildedrose.GildedRoseTest" time="0.017"/>
-  <testcase name="Test that the quality is changed with sellIn negative value" classname="com.gildedrose.GildedRoseTest" time="0.006"/>
-  <testcase name="Test that the Aged Brie quality is changed" classname="com.gildedrose.GildedRoseTest" time="0.02"/>
-  <testcase name="Test that the Aged Brie quality is changed and sellIn &lt; 0" classname="com.gildedrose.GildedRoseTest" time="0.017"/>
-  <testcase name="Test that the quality maxed out" classname="com.gildedrose.GildedRoseTest" time="0.016"/>
-  <testcase name="Test that the sellIn is changed" classname="com.gildedrose.GildedRoseTest" time="0.005"/>
+  <testcase name="Test Sulfuras is changed" classname="com.gildedrose.GildedRoseTest" time="0.002"/>
+  <testcase name="Test that the quality is changed with sellIn negative value" classname="com.gildedrose.GildedRoseTest" time="0.009"/>
+  <testcase name="Test that the Aged Brie quality is changed" classname="com.gildedrose.GildedRoseTest" time="0.009"/>
+  <testcase name="Test that the Aged Brie quality is changed and sellIn &lt; 0" classname="com.gildedrose.GildedRoseTest" time="0.01"/>
+  <testcase name="Test that the quality maxed out" classname="com.gildedrose.GildedRoseTest" time="0.008"/>
+  <testcase name="Test that the sellIn is changed" classname="com.gildedrose.GildedRoseTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

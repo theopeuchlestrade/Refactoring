@@ -17,10 +17,6 @@ class GildedRose {
                     } else {
                         item.quality += 1;
                     }
-
-                    if (item.quality > 50) {
-                        item.quality = 50;
-                    }
                     break;
 
                 case "Backstage passes to a TAFKAL80ETC concert":
@@ -33,36 +29,32 @@ class GildedRose {
                     } else {
                         item.quality += 1;
                     }
-                    if (item.quality > 50) {
-                        item.quality = 50;
-                    }
                     break;
 
                 case "Sulfuras, Hand of Ragnaros":
-                    item.quality = 80;
+                    item.quality = 80; // Legendary
                     item.sellIn = 100_000_000;
                     break;
 
                 default:
-                    int quality_decreased = 0;
-                    if (item.quality > 0) {
-                        if (item.sellIn < 0 && item.quality > 1) {
-                            quality_decreased = 2;
-                        } else {
-                            quality_decreased = 1;
-                        }
-                    }
+                    int quality_decreased = 1;
 
+                    if (item.sellIn < 0 ) {
+                        quality_decreased++;
+                    }
                     if (item.name.contains("Conjured")){
                         quality_decreased *= 2;
                     }
 
                     item.quality -= quality_decreased;
 
-                    if(item.quality <0){
+                    if(item.quality < 0){
                         item.quality = 0;
                     }
                     break;
+            }
+            if (item.quality > 50 && !item.name.equals("Sulfuras, Hand of Ragnaros")) {
+                item.quality = 50;
             }
         }
     }
