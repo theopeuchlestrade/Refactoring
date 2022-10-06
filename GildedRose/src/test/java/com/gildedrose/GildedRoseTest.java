@@ -7,7 +7,7 @@ import static org.hamcrest.Matchers.*;
 class GildedRoseTest {
 
   @Test
-  @DisplayName("Test ttoString() function worked")
+  @DisplayName("Test toString() function worked")
   void testToString() {
     Item element = new Item("foo", 0, 0);
     GildedRose app = new GildedRose(new Item[] {element});
@@ -24,11 +24,12 @@ class GildedRoseTest {
   }
 
   @Test
-  @DisplayName("Test that the quality is unchanged")
+  @DisplayName("Test that the quality is unchanged, sellIn negative value")
   void testQuality() {
     Item element = new Item("foo", 0, 0);
     GildedRose app = new GildedRose(new Item[] {element});
     app.updateQuality();
+    assertThat(app.items[0].sellIn, is(-1));
     assertThat(app.items[0].quality, is(0));
   }
 
@@ -71,12 +72,12 @@ class GildedRoseTest {
   }
 
   @Test
-  @DisplayName("Test that the Aged Brie quality is changed")
-  void testQualityAgedBrie() {
-    Item element = new Item("Aged Brie", 10, 2);
+  @DisplayName("Test that the Aged Brie quality is unchanged")
+  void testMaxedQualityAgedBrie() {
+    Item element = new Item("Aged Brie", 1, 50);
     GildedRose app = new GildedRose(new Item[] {element});
     app.updateQuality();
-    assertThat(app.items[0].quality, is(3));
+    assertThat(app.items[0].quality, is(50));
   }
 
   @Test
@@ -85,6 +86,7 @@ class GildedRoseTest {
     Item element = new Item("Aged Brie", 1, 49);
     GildedRose app = new GildedRose(new Item[] {element});
     app.updateQuality();
+    assertThat(app.items[0].sellIn, is(0));
     assertThat(app.items[0].quality, is(50));
   }
 
@@ -98,6 +100,29 @@ class GildedRoseTest {
     assertThat(app.items[0].sellIn, is(-1));
   }
 
+  @Test
+  @DisplayName("Test 'Backstage passes to a TAFKAL80ETC concert' item")
+  void testBackstageItem() {
+    Item element1 = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 0);
+    Item element2 = new Item("Backstage passes to a TAFKAL80ETC concert", 10, 0);
+    Item element3 = new Item("Backstage passes to a TAFKAL80ETC concert", 13, 0);
+    Item element4 = new Item("Backstage passes to a TAFKAL80ETC concert", 0, 50);
 
+    GildedRose app = new GildedRose(new Item[] {element1, element2, element3, element4});
+
+    app.updateQuality();
+    // Test for quality < 6
+    assertThat(app.items[0].sellIn, is(4));
+    assertThat(app.items[0].quality, is(3));
+    // Test for quality < 11
+    assertThat(app.items[1].sellIn, is(9));
+    assertThat(app.items[1].quality, is(2));
+    // Test for quality > 11
+    assertThat(app.items[2].sellIn, is(12));
+    assertThat(app.items[2].quality, is(1));
+    // Test for sellIn < 0
+    assertThat(app.items[3].sellIn, is(-1));
+    assertThat(app.items[3].quality, is(0));
+  }
 
 }
