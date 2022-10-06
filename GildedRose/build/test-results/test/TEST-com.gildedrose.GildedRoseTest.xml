@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.gildedrose.GildedRoseTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-09-23T13:00:38" hostname="pikachu" time="0.317">
+<testsuite name="com.gildedrose.GildedRoseTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2022-10-06T09:03:30" hostname="pikachu" time="0.981">
   <properties/>
-  <testcase name="Test that the name is unchanged" classname="com.gildedrose.GildedRoseTest" time="0.161"/>
-  <testcase name="Test that the quality is changed" classname="com.gildedrose.GildedRoseTest" time="0.035"/>
-  <testcase name="Test that the quality is unchanged" classname="com.gildedrose.GildedRoseTest" time="0.025"/>
-  <testcase name="Test that the price is changed" classname="com.gildedrose.GildedRoseTest" time="0.009"/>
+  <testcase name="Test that the Aged Brie quality is changed" classname="com.gildedrose.GildedRoseTest" time="0.244"/>
+  <testcase name="Test that the name is unchanged" classname="com.gildedrose.GildedRoseTest" time="0.004"/>
+  <testcase name="Test ttoString() function worked" classname="com.gildedrose.GildedRoseTest" time="0.323"/>
+  <testcase name="Test that the quality is updated for each item of app" classname="com.gildedrose.GildedRoseTest" time="0.01"/>
+  <testcase name="Test that the quality is changed" classname="com.gildedrose.GildedRoseTest" time="0.015"/>
+  <testcase name="Test Sulfuras is changed" classname="com.gildedrose.GildedRoseTest" time="0.043"/>
+  <testcase name="Test that the quality is unchanged" classname="com.gildedrose.GildedRoseTest" time="0.007"/>
+  <testcase name="Test that the Aged Brie quality is changed" classname="com.gildedrose.GildedRoseTest" time="0.017"/>
+  <testcase name="Test that the quality maxed out" classname="com.gildedrose.GildedRoseTest" time="0.008"/>
+  <testcase name="Test that the sellIn is changed" classname="com.gildedrose.GildedRoseTest" time="0.013"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
