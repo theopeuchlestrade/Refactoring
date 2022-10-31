@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GildedRose.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gilded-rose-kata</a> &gt; <a href="index.source.html" class="el_package">com.gildedrose</a> &gt; <span class="el_source">GildedRose.java</span></div><h1>GildedRose.java</h1><pre class="source lang-java linenums">package com.gildedrose;
+
+class GildedRose {
+    Item[] items;
+
+<span class="fc" id="L6">    int max_Quality = 50;</span>
+
+<span class="fc" id="L8">    int min_Quality = 0;</span>
+
+<span class="fc" id="L10">    int legendary_Quality = 80;</span>
+
+<span class="fc" id="L12">    String[] legendary_items = {</span>
+            (&quot;Sulfuras, Hand of Ragnaros&quot;)
+    };
+
+<span class="fc" id="L16">    public GildedRose(Item[] items) {</span>
+<span class="fc" id="L17">        this.items = items;</span>
+<span class="fc" id="L18">    }</span>
+
+    public void updateQuality() {
+<span class="fc bfc" id="L21" title="All 2 branches covered.">        for (Item item : items) {</span>
+<span class="fc bfc" id="L22" title="All 3 branches covered.">            switch (item.name) {</span>
+                case &quot;Aged Brie&quot;:
+<span class="fc" id="L24">                    agedBrie(item);</span>
+<span class="fc" id="L25">                    break;</span>
+
+                case &quot;Backstage passes to a TAFKAL80ETC concert&quot;:
+<span class="fc" id="L28">                    backstagePassesToATAFKAL80ETCConcert(item);</span>
+<span class="fc" id="L29">                    break;</span>
+
+                default:
+<span class="fc" id="L32">                    itemUpdates(item);</span>
+                    break;
+            }
+<span class="fc" id="L35">            validQuality(item);</span>
+        }
+<span class="fc" id="L37">    }</span>
+
+    public void itemUpdates(Item item){
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if(notALegendaryItem(item)){</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">            if (item.sellIn != 0) item.sellIn--;</span>
+
+<span class="fc bfc" id="L43" title="All 2 branches covered.">            if (item.name.contains(&quot;Conjured&quot;)) {</span>
+<span class="fc" id="L44">                conjuredItemUpdates(item);</span>
+            } else {
+<span class="fc" id="L46">                itemQualityUpdates(item);</span>
+            }
+        }
+        else{
+<span class="fc" id="L50">            item.quality = legendary_Quality;</span>
+        }
+<span class="fc" id="L52">    }</span>
+
+    public void itemQualityUpdates(Item item){
+<span class="fc" id="L55">        decreaseQuality(item);</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (item.sellIn == 0) {</span>
+<span class="fc" id="L57">            decreaseQuality(item);</span>
+        }
+<span class="fc" id="L59">    }</span>
+
+    public void conjuredItemUpdates(Item item){
+<span class="fc" id="L62">        itemQualityUpdates(item);</span>
+<span class="fc" id="L63">        itemQualityUpdates(item);</span>
+<span class="fc" id="L64">    }</span>
+
+    public void agedBrie(Item item){
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (item.sellIn == 0) {</span>
+<span class="fc" id="L68">            incrementQuality(item);</span>
+<span class="fc" id="L69">            incrementQuality(item);</span>
+        } else {
+<span class="fc" id="L71">            incrementQuality(item);</span>
+<span class="fc" id="L72">            item.sellIn--;</span>
+        }
+<span class="fc" id="L74">    }</span>
+
+    public void backstagePassesToATAFKAL80ETCConcert(Item item){
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (item.sellIn == 0) {</span>
+<span class="fc" id="L78">            item.quality = min_Quality;</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        } else if (item.sellIn &lt; 6) {</span>
+<span class="fc" id="L80">            incrementQuality(item);</span>
+<span class="fc" id="L81">            incrementQuality(item);</span>
+<span class="fc" id="L82">            incrementQuality(item);</span>
+<span class="fc" id="L83">            item.sellIn--;</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        } else if (item.sellIn &lt; 11) {</span>
+<span class="fc" id="L85">            incrementQuality(item);</span>
+<span class="fc" id="L86">            incrementQuality(item);</span>
+<span class="fc" id="L87">            item.sellIn--;</span>
+        } else {
+<span class="fc" id="L89">            incrementQuality(item);</span>
+<span class="fc" id="L90">            item.sellIn--;</span>
+        }
+<span class="fc" id="L92">    }</span>
+
+    public void incrementQuality(Item item){
+<span class="fc" id="L95">        item.quality += 1;</span>
+<span class="fc" id="L96">    }</span>
+
+    public void decreaseQuality(Item item){
+<span class="fc" id="L99">        item.quality -= 1;</span>
+<span class="fc" id="L100">    }</span>
+
+    public void validQuality(Item item){
+<span class="fc bfc" id="L103" title="All 4 branches covered.">        if (item.quality &gt; max_Quality &amp;&amp; notALegendaryItem(item)){</span>
+<span class="fc" id="L104">            item.quality = max_Quality;</span>
+        }
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        else if (item.quality &lt; min_Quality){</span>
+<span class="fc" id="L107">            item.quality = min_Quality;</span>
+        }
+<span class="fc" id="L109">    }</span>
+
+    public boolean notALegendaryItem(Item item){
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        for (String l_item_name : legendary_items){</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">            if (l_item_name.equals(item.name)){</span>
+<span class="fc" id="L114">                item.quality = legendary_Quality;</span>
+<span class="fc" id="L115">                return false;</span>
+            }
+        }
+<span class="fc" id="L118">        return true;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

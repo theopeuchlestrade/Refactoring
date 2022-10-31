@@ -24,31 +24,26 @@ class GildedRoseTest {
   }
 
   @Test
-  @DisplayName("Test that the quality is changed with sellIn negative value")
-  void testQuality() {
-    Item element = new Item("foo", -1, 10);
-    GildedRose app = new GildedRose(new Item[] {element});
-    app.updateQuality();
-    assertThat(app.items[0].sellIn, is(-2));
-    assertThat(app.items[0].quality, is(8));
-  }
-
-  @Test
-  @DisplayName("Test that the quality maxed out")
-  void testQualityMaxed() {
-    Item element = new Item("Aged Brie", 10, 49);
-    GildedRose app = new GildedRose(new Item[] {element});
-    app.updateQuality();
-    assertThat(app.items[0].quality, is(50));
-  }
-
-  @Test
   @DisplayName("Test that the quality is changed")
-  void testQualityGildedRose() {
-    Item element = new Item("foo", 10, 1);
-    GildedRose app = new GildedRose(new Item[] {element});
+  void testQuality() {
+    // Test if the quality is changed
+    Item element0 = new Item("foo", 10, 1);
+    // Test if the quality changed if the sellIn value is 0
+    Item element1 = new Item("foo", 0, 10);
+    // Test if the quality can be maxed
+    Item element2 = new Item("Aged Brie", 10, 49);
+
+    GildedRose app = new GildedRose(new Item[] {element0, element1, element2});
+
     app.updateQuality();
+    // Checking values for element0
     assertThat(app.items[0].quality, is(0));
+    // Checking values for element1
+    assertThat(app.items[1].sellIn, is(0));
+    assertThat(app.items[1].quality, is(8));
+    // Checking values for element2
+    assertThat(app.items[2].quality, is(50));
+
   }
 
   @Test
@@ -61,46 +56,31 @@ class GildedRoseTest {
   }
 
   @Test
-  @DisplayName("Test that the quality is updated for each item of app")
-  void testMultipleQualityUpdate() {
-    Item element1 = new Item("poo", 2, 10);
-    Item element2 = new Item("foo", 2, 10);
-    GildedRose app = new GildedRose(new Item[] {element1, element2});
-    app.updateQuality();
-    assertThat(app.items[0].quality, is(9));
-    assertThat(app.items[1].quality, is(9));
-  }
+  @DisplayName("Test of the items named 'Aged Brie'")
+  void testAgedBrie() {
+    // Test that the Aged Brie quality is unchanged
+    Item aged_brie0 = new Item("Aged Brie", 1, 50);
+    // Test that the Aged Brie quality is changed
+    Item aged_brie1 = new Item("Aged Brie", 1, 49);
+    // Test that the Aged Brie quality is changed and sellIn = 0
+    Item aged_brie2 = new Item("Aged Brie", 0, 48);
+    // Test that the Aged Brie quality doesn't go over 50
+    Item aged_brie2b = new Item("Aged Brie", 0, 49);
 
-  @Test
-  @DisplayName("Test that the Aged Brie quality is unchanged")
-  void testMaxedQualityAgedBrie() {
-    Item element = new Item("Aged Brie", 1, 50);
-    GildedRose app = new GildedRose(new Item[] {element});
-    app.updateQuality();
-    assertThat(app.items[0].quality, is(50));
-  }
+    GildedRose app = new GildedRose(new Item[] {aged_brie0, aged_brie1, aged_brie2, aged_brie2b});
 
-  @Test
-  @DisplayName("Test that the Aged Brie quality is changed")
-  void testQualityAgedBrieSellIn0() {
-    Item element = new Item("Aged Brie", 1, 49);
-    GildedRose app = new GildedRose(new Item[] {element});
     app.updateQuality();
-    assertThat(app.items[0].sellIn, is(0));
+    // Checking values for aged_brie0
     assertThat(app.items[0].quality, is(50));
-  }
-
-  @Test
-  @DisplayName("Test that the Aged Brie quality is changed and sellIn < 0")
-  void testQualityAgedBrieInf0() {
-    Item element1 = new Item("Aged Brie", 0, 48);
-    Item element2 = new Item("Aged Brie", 0, 49);
-    GildedRose app = new GildedRose(new Item[] {element1, element2});
-    app.updateQuality();
-    assertThat(app.items[0].sellIn, is(-1));
-    assertThat(app.items[0].quality, is(50));
-    assertThat(app.items[1].sellIn, is(-1));
+    // Checking values for aged_brie1
+    assertThat(app.items[1].sellIn, is(0));
     assertThat(app.items[1].quality, is(50));
+    // Checking values of aged_brie2
+    assertThat(app.items[2].sellIn, is(0));
+    assertThat(app.items[2].quality, is(50));
+    // Checking values of aged_brie2b
+    assertThat(app.items[3].sellIn, is(0));
+    assertThat(app.items[3].quality, is(50));
   }
 
   @Test
@@ -136,7 +116,7 @@ class GildedRoseTest {
     assertThat(app.items[2].sellIn, is(12));
     assertThat(app.items[2].quality, is(1));
     // Test for sellIn < 0
-    assertThat(app.items[3].sellIn, is(-1));
+    assertThat(app.items[3].sellIn, is(0));
     assertThat(app.items[3].quality, is(0));
 
     // Test if quality > 50
@@ -149,17 +129,21 @@ class GildedRoseTest {
   }
 
   @Test
-  @DisplayName("Test Conjured item")
-  void testConjuredItem(){
+  @DisplayName("Test Conjured items")
+  void testConjuredItems(){
+    // Test if the quality of Conjured items is updated correctly
     Item element1 = new Item("Conjured Shoes", 10, 20);
     Item element2 = new Item("Conjured Shoes", 0, 20);
+
     GildedRose app = new GildedRose(new Item[] {element1, element2});
+
     app.updateQuality();
+    // Checking the values of conjured item with sellIn > 0
     assertThat(element1.quality, is(18));
     assertThat(element1.sellIn, is(9));
-
+    // Checking the values of conjured item with sellIn = 0
     assertThat(element2.quality, is(16));
-    assertThat(element2.sellIn, is(-1));
+    assertThat(element2.sellIn, is(0));
   }
 
 }

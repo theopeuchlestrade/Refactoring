@@ -38,7 +38,8 @@ class GildedRose {
 
     public void itemUpdates(Item item){
         if(notALegendaryItem(item)){
-            item.sellIn--;
+            if (item.sellIn != 0) item.sellIn--;
+
             if (item.name.contains("Conjured")) {
                 conjuredItemUpdates(item);
             } else {
@@ -52,7 +53,7 @@ class GildedRose {
 
     public void itemQualityUpdates(Item item){
         decreaseQuality(item);
-        if (outOfDate(item)) {
+        if (item.sellIn == 0) {
             decreaseQuality(item);
         }
     }
@@ -63,34 +64,33 @@ class GildedRose {
     }
 
     public void agedBrie(Item item){
-        item.sellIn--;
-        if (outOfDate(item)) {
+        if (item.sellIn == 0) {
             incrementQuality(item);
             incrementQuality(item);
         } else {
             incrementQuality(item);
+            item.sellIn--;
         }
     }
 
     public void backstagePassesToATAFKAL80ETCConcert(Item item){
-        item.sellIn--;
-        if (outOfDate(item)) {
+        if (item.sellIn == 0) {
             item.quality = min_Quality;
         } else if (item.sellIn < 6) {
             incrementQuality(item);
             incrementQuality(item);
             incrementQuality(item);
+            item.sellIn--;
         } else if (item.sellIn < 11) {
             incrementQuality(item);
             incrementQuality(item);
+            item.sellIn--;
         } else {
             incrementQuality(item);
+            item.sellIn--;
         }
     }
 
-    public boolean outOfDate(Item item){
-        return (item.sellIn < 0);
-    }
     public void incrementQuality(Item item){
         item.quality += 1;
     }
